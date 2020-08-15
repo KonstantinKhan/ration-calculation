@@ -1,0 +1,55 @@
+@media (min-width: 992px) {
+  .sidenav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+    margin-top: 3.5rem;
+    height: 100vh;
+    background-color: silver;
+  }
+
+  .navbar-expand-md .sidenav {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .sidenav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+    margin-top: 3.5rem;
+    height: 100vh;
+    background-color: silver;
+  }
+
+  .navbar-expand-md .sidenav {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidenav {
+    position: absolute;
+    left: 0;
+    margin-top: 0.5rem;
+    height: 100vh;
+    background-color: silver;
+  }
+
+  .content-wrapper-small {
+    opacity: 0.5;
+  }
+}
+
+
+.content-wrapper {
+  margin-top: 4.5rem;
+}
+
+.nav-link {
+  padding-left: 0.5rem;
+}
+
