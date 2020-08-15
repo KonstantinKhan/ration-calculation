@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ration-calculation"
+    }
+  },
+  "defaultProject": "ration-calculation",
+  "cli": {
+    "analytics": false
+  }
 }
