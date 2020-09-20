@@ -1,16 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
-import {registerLocaleData} from '@angular/common';
+import {DatePipe, registerLocaleData} from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { RationComponent } from './ration/ration.component';
-import { DishesComponent } from './dishes/dishes.component';
-import { ProductsComponent } from './products/products.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {MainLayoutComponent} from './main-layout/main-layout.component';
+import {RationComponent} from './ration/ration.component';
+import {DishesComponent} from './dishes/dishes.component';
+import {ProductsComponent} from './products/products.component';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -20,16 +23,22 @@ registerLocaleData(localeRu, 'ru');
     MainLayoutComponent,
     RationComponent,
     DishesComponent,
-    ProductsComponent
+    ProductsComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'ru'}
+    {provide: LOCALE_ID, useValue: 'ru'},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

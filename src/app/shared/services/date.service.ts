@@ -7,4 +7,8 @@ export class DateService {
     return new Date();
   }
 
+  dateToStringFormat(date: Date): string {
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  }
+
 }

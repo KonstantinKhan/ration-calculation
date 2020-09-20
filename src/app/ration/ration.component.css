@@ -3,7 +3,50 @@ header {
 }
 
 .col-3 {
+  text-align: right;
+}
+
+.col-9 {
+  text-align: left;
+}
+
+.row p {
+  margin: 0;
+}
+
+img {
+  border-radius: 1rem;
+  padding: 0;
+}
+
+.ration-info-wrapper {
+  padding: 2rem;
+}
+
+.eating-header {
   text-align: center;
+}
+
+.auxiliary-field {
+  text-align: center;
+}
+
+.eating-block {
+  border: 1px solid orange;
+  border-radius: 1px;
+}
+
+.search-results {
+  width: calc(100% - 30px);
+  position: absolute;
+  z-index: 1;
+  border: 1px solid silver;
+  background-color: orange;
+}
+
+.search-results :hover {
+  background-color: green;
+  cursor: default;
 }
 
 /*# sourceMappingURL=ration.component.css.map */
