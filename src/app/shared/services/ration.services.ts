@@ -14,9 +14,10 @@ export class RationServices {
   }
 
   getRation(date: string): Observable<Ration> {
-    return this.http.get<Ration>(`${environment.dbUrl}/ration/` + date + '.json', {
-      headers: this.auth.getHeaderAuth()
-    });
+    return this.http.post<Ration>(`${environment.dbUrl}/ration/` + date + '.json', +localStorage.getItem('user-id'),
+      {
+        headers: this.auth.getHeaderAuth()
+      });
   }
 
   addProduct(date: string, rationProduct: RationProduct): Observable<Ration> {

@@ -16,9 +16,10 @@ export class ProductService {
     return this.http.get<Product[]>(`${environment.dbUrl}/products/all.json`);
   }
 
-  getSearchProducts(name: string, user: number): Observable<Product[]> {
-    return this.http.post<Product[]>(`${environment.dbUrl}/products/search/` + name + '.json', user, {
-      headers: this.auth.getHeaderAuth()
-    });
+  getSearchProducts(name: string): Observable<Product[]> {
+    return this.http.post<Product[]>(`${environment.dbUrl}/products/search/` + name + '.json', +localStorage.getItem('user-id'),
+      {
+        headers: this.auth.getHeaderAuth()
+      });
   }
 }

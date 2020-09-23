@@ -135,7 +135,7 @@ export class RationComponent implements OnInit {
     switch (eating) {
       case 'b':
         if (this.searchComponentBreakfast.trim()) {
-          this.pSub = this.productService.getSearchProducts(this.searchComponentBreakfast, +localStorage.getItem('user-id'))
+          this.pSub = this.productService.getSearchProducts(this.searchComponentBreakfast)
             .subscribe((products: Product[]) => {
               this.componentsSearchBreakfast = products;
             });

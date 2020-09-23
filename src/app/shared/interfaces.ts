@@ -25,6 +25,7 @@ export interface Ration {
   proteins: number;
   fats: number;
   carbohydrates: number;
+  userId: number;
   ration_product: RationProduct[];
 }
 
