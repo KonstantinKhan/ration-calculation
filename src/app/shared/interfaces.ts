@@ -6,6 +6,7 @@ export interface Product {
   fats: number;
   carbohydrates: number;
   verified: boolean;
+  userId: number;
 }
 
 export interface Dish {
@@ -47,4 +48,5 @@ export interface User {
 export interface AuthResponse {
   idToken: string;
   expiresIn: string;
+  userId: number;
 }

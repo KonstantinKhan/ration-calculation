@@ -1,25 +1,28 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Ration, RationProduct} from '../interfaces';
 import {environment} from '../../../environments/environment';
+import {AuthService} from './auth.service';
 
 @Injectable({providedIn: 'root'})
 export class RationServices {
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService) {
   }
 
   getRation(date: string): Observable<Ration> {
-    const myHeaders = new HttpHeaders()
-      .set('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get<Ration>(`${environment.dbUrl}/ration/` + date + '.json', {
-      headers: myHeaders
+      headers: this.auth.getHeaderAuth()
     });
   }
 
   addProduct(date: string, rationProduct: RationProduct): Observable<Ration> {
-    return this.http.post<Ration>(`${environment.dbUrl}/add_product/ration/` + date + `.json`, rationProduct);
+    return this.http.post<Ration>(`${environment.dbUrl}/add_product/ration/` + date + `.json`, rationProduct, {
+      headers: this.auth.getHeaderAuth()
+    });
   }
 
   updateRation(date: string, rationProduct: RationProduct): Observable<Ration> {

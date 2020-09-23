@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostBinding, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {DateService} from '../shared/services/date.service';
 import {Dish, Product, Ration, RationProduct} from '../shared/interfaces';
 import {Subscription} from 'rxjs';
@@ -135,9 +135,10 @@ export class RationComponent implements OnInit {
     switch (eating) {
       case 'b':
         if (this.searchComponentBreakfast.trim()) {
-          this.pSub = this.productService.getSearchProducts(this.searchComponentBreakfast).subscribe((data: Product[]) => {
-            this.componentsSearchBreakfast = data;
-          });
+          this.pSub = this.productService.getSearchProducts(this.searchComponentBreakfast, +localStorage.getItem('user-id'))
+            .subscribe((products: Product[]) => {
+              this.componentsSearchBreakfast = products;
+            });
           /*this.dSub = this.dishesService.getSearchDish(this.searchComponent).subscribe((data: Dish[]) => {
             this.components = this.components.concat(data);
           });*/
@@ -145,42 +146,42 @@ export class RationComponent implements OnInit {
           this.componentsSearchBreakfast.length = 0;
         }
         break;
-      case 'l':
-        if (this.searchComponentLunch.trim()) {
-          this.pSub = this.productService.getSearchProducts(this.searchComponentLunch).subscribe((data: Product[]) => {
-            this.componentsSearchLunch = data;
-          });
-          /*this.dSub = this.dishesService.getSearchDish(this.searchComponent).subscribe((data: Dish[]) => {
-            this.components = this.components.concat(data);
-          });*/
-        } else {
-          this.componentsSearchLunch.length = 0;
-        }
-        break;
-      case 'd':
-        if (this.searchComponentDinner.trim()) {
-          this.pSub = this.productService.getSearchProducts(this.searchComponentDinner).subscribe((data: Product[]) => {
-            this.componentsSearchDinner = data;
-          });
-          /*this.dSub = this.dishesService.getSearchDish(this.searchComponent).subscribe((data: Dish[]) => {
-            this.components = this.components.concat(data);
-          });*/
-        } else {
-          this.componentsSearchDinner.length = 0;
-        }
-        break;
-      case 's':
-        if (this.searchComponentSnack.trim()) {
-          this.pSub = this.productService.getSearchProducts(this.searchComponentSnack).subscribe((data: Product[]) => {
-            this.componentsSearchSnack = data;
-          });
-          /*this.dSub = this.dishesService.getSearchDish(this.searchComponent).subscribe((data: Dish[]) => {
-            this.components = this.components.concat(data);
-          });*/
-        } else {
-          this.componentsSearchSnack.length = 0;
-        }
-        break;
+      // case 'l':
+      //   if (this.searchComponentLunch.trim()) {
+      //     this.pSub = this.productService.getSearchProducts(this.searchComponentLunch, 4).subscribe((data: Product[]) => {
+      //       this.componentsSearchLunch = data;
+      //     });
+      //     /*this.dSub = this.dishesService.getSearchDish(this.searchComponent).subscribe((data: Dish[]) => {
+      //       this.components = this.components.concat(data);
+      //     });*/
+      //   } else {
+      //     this.componentsSearchLunch.length = 0;
+      //   }
+      //   break;
+      // case 'd':
+      //   if (this.searchComponentDinner.trim()) {
+      //     this.pSub = this.productService.getSearchProducts(this.searchComponentDinner, 4).subscribe((data: Product[]) => {
+      //       this.componentsSearchDinner = data;
+      //     });
+      //     /*this.dSub = this.dishesService.getSearchDish(this.searchComponent).subscribe((data: Dish[]) => {
+      //       this.components = this.components.concat(data);
+      //     });*/
+      //   } else {
+      //     this.componentsSearchDinner.length = 0;
+      //   }
+      //   break;
+      // case 's':
+      //   if (this.searchComponentSnack.trim()) {
+      //     this.pSub = this.productService.getSearchProducts(this.searchComponentSnack, 4).subscribe((data: Product[]) => {
+      //       this.componentsSearchSnack = data;
+      //     });
+      //     /*this.dSub = this.dishesService.getSearchDish(this.searchComponent).subscribe((data: Dish[]) => {
+      //       this.components = this.components.concat(data);
+      //     });*/
+      //   } else {
+      //     this.componentsSearchSnack.length = 0;
+      //   }
+      //   break;
     }
   }
 
