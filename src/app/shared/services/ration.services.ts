@@ -21,7 +21,8 @@ export class RationServices {
   }
 
   addProduct(date: string, rationProduct: RationProduct): Observable<Ration> {
-    return this.http.post<Ration>(`${environment.dbUrl}/add_product/ration/` + date + `.json`, rationProduct, {
+    return this.http.post<Ration>(`${environment.dbUrl}/add_product/ration/` + date + `.json`, JSON.stringify
+    ([rationProduct, +localStorage.getItem('user-id')]), {
       headers: this.auth.getHeaderAuth()
     });
   }
