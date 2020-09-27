@@ -1,1 +1,19 @@
-<p>dishes works!</p>
+<p>Блюда</p>
+<div>
+  <table border="1">
+    <tr>
+      <th>Название блюда</th>
+      <th>Калорийность, ккал</th>
+      <th>Белки, г</th>
+      <th>Жиры, г</th>
+      <th>Угеводы, г</th>
+    </tr>
+    <tr *ngFor="let product of dishes">
+      <th>{{product.name}}</th>
+      <th>{{product.calories}}</th>
+      <th>{{product.proteins}}</th>
+      <th>{{product.fats}}</th>
+      <th>{{product.carbohydrates}}</th>
+    </tr>
+  </table>
+</div>

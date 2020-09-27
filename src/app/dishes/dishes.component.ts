@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DishService} from '../shared/services/dish.service';
+import {Dish} from '../shared/interfaces';
 
 @Component({
   selector: 'app-dishes',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DishesComponent implements OnInit {
 
-  constructor() { }
+  dishes: Dish[];
+
+  constructor(
+    private dishService: DishService
+  ) {
+  }
 
   ngOnInit(): void {
+    this.dishService.getAllDishes().subscribe((dishes: Dish[]) => {
+      this.dishes = dishes;
+    });
   }
 
 }

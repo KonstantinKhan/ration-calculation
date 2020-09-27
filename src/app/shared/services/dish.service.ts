@@ -13,4 +13,8 @@ export class DishService {
   getSearchDish(name: string): Observable<Dish[]> {
     return this.http.get<Dish[]>(`${environment.dbUrl}/dishes/search/` + name + '.json');
   }
+
+  getAllDishes(): Observable<Dish[]> {
+    return this.http.get<Dish[]>(`${environment.dbUrl}/dishes/all.json`);
+  }
 }
