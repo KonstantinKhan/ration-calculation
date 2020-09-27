@@ -1,7 +1,19 @@
 <p>Продукты</p>
-<div
-  *ngFor="let product of products"
->
-  <p>{{product.name}}</p>
-
+<div>
+  <table border="1">
+    <tr>
+      <th>Название продукта</th>
+      <th>Калорийность, ккал</th>
+      <th>Белки, г</th>
+      <th>Жиры, г</th>
+      <th>Угеводы, г</th>
+    </tr>
+    <tr *ngFor="let product of products">
+      <th>{{product.name}}</th>
+      <th>{{product.calories}}</th>
+      <th>{{product.proteins}}</th>
+      <th>{{product.fats}}</th>
+      <th>{{product.carbohydrates}}</th>
+    </tr>
+  </table>
 </div>
