@@ -14,22 +14,20 @@ export class RationServices {
   }
 
   getRation(date: string): Observable<Ration> {
-    return this.http.post<Ration>(`${environment.dbUrl}/ration/` + date + '.json', +localStorage.getItem('user-id'),
+    return this.http.get<Ration>(`${environment.dbUrl}/ration/` + date + '.json',
       {
         headers: this.auth.getHeaderAuth()
       });
   }
 
   addProduct(date: string, rationProduct: RationProduct): Observable<Ration> {
-    return this.http.post<Ration>(`${environment.dbUrl}/add_product/ration/` + date + `.json`, JSON.stringify
-    ([rationProduct, +localStorage.getItem('user-id')]), {
+    return this.http.post<Ration>(`${environment.dbUrl}/add_product/ration/` + date + `.json`, rationProduct, {
       headers: this.auth.getHeaderAuth()
     });
   }
 
   updateRation(date: string, rationProduct: RationProduct): Observable<Ration> {
-    return this.http.patch<Ration>(`${environment.dbUrl}/update/ration/` + date + `.json`, JSON.stringify
-      ([rationProduct, +localStorage.getItem('user-id')]),
+    return this.http.patch<Ration>(`${environment.dbUrl}/update/ration/` + date + `.json`, rationProduct,
       {headers: this.auth.getHeaderAuth()});
   }
 

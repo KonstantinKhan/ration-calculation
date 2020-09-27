@@ -49,5 +49,4 @@ export interface User {
 export interface AuthResponse {
   idToken: string;
   expiresIn: string;
-  userId: number;
 }
