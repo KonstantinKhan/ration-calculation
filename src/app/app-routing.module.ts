@@ -11,7 +11,6 @@ import {AuthGuard} from './shared/services/auth.guard';
 const routes: Routes = [
   {path: '', component: MainLayoutComponent, children: [
       {path: '', redirectTo: '/', pathMatch: 'full'},
-      {path: '', component: RationComponent, canActivate: [AuthGuard]},
       {path: 'ration/:id', component: RationComponent, canActivate: [AuthGuard]},
       {path: 'dishes', component: DishesComponent, canActivate: [AuthGuard]},
       {path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},

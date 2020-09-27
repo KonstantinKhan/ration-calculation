@@ -49,7 +49,7 @@ export class LoginPageComponent implements OnInit {
 
     this.auth.login(user).subscribe(() => {
       this.form.reset();
-      this.router.navigate([`/ration/` + dateStr + `.json`]);
+      this.router.navigate([`/ration/` + dateStr]);
     });
   }
 }

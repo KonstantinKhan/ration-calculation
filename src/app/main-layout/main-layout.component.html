@@ -23,13 +23,13 @@
     id="navbarSupportedContent"
     [ngbCollapse]="isCollapse">
     <ul class="navbar-nav col-lg-2 col-sm-8 col-md-3 col-8 sidenav">
-      <li class="nav-item active" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['ration/1']">Сегодня</a>
+      <li routerLinkActive="active">
+        <a class="nav-link"[routerLink]="['ration/', dateStr]">Сегодня</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+      <li routerLinkActive="active">
         <a class="nav-link" [routerLink]="['dishes']">Блюда</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+      <li routerLinkActive="active">
         <a class="nav-link" [routerLink]="['products']">Продукты</a>
       </li>
     </ul>
