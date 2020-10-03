@@ -13,7 +13,9 @@ import {DishesComponent} from './dishes/dishes.component';
 import {ProductsComponent} from './products/products.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { LoginPageComponent } from './login-page/login-page.component';
+import {LoginPageComponent} from './login-page/login-page.component';
+import {AddProductComponent} from './add-product/add-product.component';
+import {RefDirective} from './ref.directive';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -24,7 +26,9 @@ registerLocaleData(localeRu, 'ru');
     RationComponent,
     DishesComponent,
     ProductsComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    AddProductComponent,
+    RefDirective
   ],
   imports: [
     BrowserModule,

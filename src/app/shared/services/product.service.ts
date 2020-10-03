@@ -22,4 +22,10 @@ export class ProductService {
         headers: this.auth.getHeaderAuth()
       });
   }
+
+  addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(`${environment.dbUrl}/product/add.json`, product, {
+      headers: this.auth.getHeaderAuth()
+    });
+  }
 }
