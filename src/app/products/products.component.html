@@ -7,42 +7,6 @@
   (click)="showNewProduct()">Новый продукт
 </button>
 
-
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <div *ngIf="isCreate">
-    <tr>
-      <th>Название продукта</th>
-      <th>Калорийность, ккал</th>
-      <th>Белки, г</th>
-      <th>Жиры, г</th>
-      <th>Угеводы, г</th>
-    </tr>
-    <tr>
-      <th>
-        <input type="text" formControlName="name">
-      </th>
-      <th>
-        <input type="number" formControlName="calories">
-      </th>
-      <th>
-        <input type="number" formControlName="proteins">
-      </th>
-      <th>
-        <input type="number" formControlName="fats">
-      </th>
-      <th>
-        <input type="number" formControlName="carbohydrates">
-      </th>
-      <th>
-        <button
-          type="submit"
-          [disabled]="form.invalid"
-        >Добавить
-        </button>
-      </th>
-    </tr>
-  </div>
-</form>
 <div>
   <table border="1">
     <tr>
