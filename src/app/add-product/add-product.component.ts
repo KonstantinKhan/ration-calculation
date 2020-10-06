@@ -16,7 +16,7 @@ export class AddProductComponent implements OnInit {
   form: FormGroup;
 
   @Input() title;
-  @Output() close = new EventEmitter<void>();
+  @Output() closeEmitter = new EventEmitter<void>();
 
   constructor(
     private productService: ProductService,
@@ -58,17 +58,16 @@ export class AddProductComponent implements OnInit {
       verified: false,
       userId: null
     };
-    console.log(product);
     this.productService.addProduct(product).subscribe(() => {
       this.commonService.callNgInit();
     });
-    this.close.emit();
+    this.closeEmitter.emit();
   }
 
   @HostListener('click', ['$event'])
   onClick(event): void {
     if (!this.addProductForm.nativeElement.contains(event.target)) {
-      this.close.emit();
+      this.closeEmitter.emit();
     }
   }
 }

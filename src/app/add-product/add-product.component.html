@@ -1,8 +1,8 @@
 <div class="backdrop">
-  <div class="add-product"
+  <div class="add-window"
   #addProductForm
   >
-    <div class="navbar">
+    <div>
       <h1>{{title}}</h1>
     </div>
 
@@ -42,7 +42,7 @@
       </div>
     </form>
 
-    <button class="btn" (click)="close.emit()">
+    <button class="btn" (click)="closeEmitter.emit()">
       Close
     </button>
   </div>

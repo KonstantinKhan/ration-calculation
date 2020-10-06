@@ -24,13 +24,12 @@ export class ProductsComponent implements OnInit {
     this.commonService.invokeEvent.subscribe( value => {
       // if (value === 'someVal') {
       //   console.log('Вызов метода')
-        this.ngOnInit()
+        this.ngOnInit();
       // }
-    })
+    });
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit()')
     this.productService.getAll().subscribe((products: Product[]) => {
       this.products = products;
     });
@@ -42,7 +41,7 @@ export class ProductsComponent implements OnInit {
     const component = this.refDir.containerRef.createComponent(modalFactory);
 
     component.instance.title = 'Новый продукт';
-    component.instance.close.subscribe(() => {
+    component.instance.closeEmitter.subscribe(() => {
       this.refDir.containerRef.clear();
     });
   }

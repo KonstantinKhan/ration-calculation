@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {AddProductComponent} from './add-product/add-product.component';
 import {RefDirective} from './ref.directive';
+import { AddDishComponent } from './add-dish/add-dish.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -28,7 +29,8 @@ registerLocaleData(localeRu, 'ru');
     ProductsComponent,
     LoginPageComponent,
     AddProductComponent,
-    RefDirective
+    RefDirective,
+    AddDishComponent
   ],
   imports: [
     BrowserModule,
