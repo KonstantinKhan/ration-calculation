@@ -36,14 +36,6 @@ img {
   border-radius: 1px;
 }
 
-.search-results {
-  width: calc(100% - 30px);
-  position: absolute;
-  z-index: 1;
-  border: 1px solid silver;
-  background-color: orange;
-}
-
 .search-results :hover {
   background-color: green;
   cursor: default;

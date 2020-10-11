@@ -10,12 +10,16 @@ export interface Product {
 }
 
 export interface Dish {
+  dishId: number;
   name: string;
   calories: number;
   proteins: number;
   fats: number;
   carbohydrates: number;
   eating: string;
+  weightRaw: number;
+  weightCooked: number;
+  dishProduct: DishProduct[];
 }
 
 export interface Ration {
@@ -34,6 +38,13 @@ export interface RationProduct {
   product: Product;
   weight: number;
   eating: string;
+}
+
+export interface DishProduct {
+  dishProductId: number;
+  product: Product;
+  eating: string;
+  weight: number;
 }
 
 export interface RationCompositionDish {

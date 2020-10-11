@@ -4,7 +4,66 @@
     #addDishForm
   >
     <div>
-      <h1>Заголовок</h1>
+      <h1>
+        <input class="col-12" type="text"
+               placeholder="Введите название блюда">
+      </h1>
+      <div class="row col-12">
+        <p></p>
+        <div class="col-2">{{dish.calories}}</div>
+        <div class="col-2">{{dish.proteins}}</div>
+        <div class="col-2">{{dish.fats}}</div>
+        <div class="col-2">{{dish.calories}}</div>
+        <div class="col-2">{{dish.weightRaw}}</div>
+      </div>
     </div>
+    <input
+      #inputSearch
+      type="text"
+      placeholder="Выберите продукт"
+      [(ngModel)]="searchComponent"
+      (input)="search()"
+    >
+    <div
+      class="search-results"
+      *ngIf="searchComponent.length > 0">
+      <p
+        #searchResult
+        *ngFor="let product of searchResults"
+        (click)="addProduct(product)"
+      >{{product.name}}</p>
+    </div>
+    <div>
+      <table border="1">
+        <tr>
+          <th>Название продукта</th>
+          <th>Калорийность, ккал</th>
+          <th>Белки, г</th>
+          <th>Жиры, г</th>
+          <th>Углеводы, г</th>
+          <th>Вес, г</th>
+        </tr>
+        <tr *ngFor="let product of dish.dishProduct">
+          <th>{{product.product.name}}</th>
+          <th>{{product.product.calories}}</th>
+          <th>{{product.product.proteins}}</th>
+          <th>{{product.product.fats}}</th>
+          <th>{{product.product.carbohydrates}}</th>
+          <th>
+            <input type="number"
+                   placeholder="Укажите вес"
+                   (input)="serWeightComponent(product, $event)">
+          </th>
+        </tr>
+      </table>
+    </div>
+    <button
+      type="button"
+      (click)="closeEmitter.emit()"
+    >close
+    </button>
+    <button type="submit">
+      save
+    </button>
   </div>
 </div>
