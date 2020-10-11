@@ -6,7 +6,8 @@
     <div>
       <h1>
         <input class="col-12" type="text"
-               placeholder="Введите название блюда">
+               placeholder="Введите название блюда"
+        (input)="saveName($event)">
       </h1>
       <div class="row col-12">
         <p></p>
@@ -43,7 +44,7 @@
           <th>Углеводы, г</th>
           <th>Вес, г</th>
         </tr>
-        <tr *ngFor="let product of dish.dishProduct">
+        <tr *ngFor="let product of dish.dish_product">
           <th>{{product.product.name}}</th>
           <th>{{product.product.calories}}</th>
           <th>{{product.product.proteins}}</th>
@@ -62,7 +63,8 @@
       (click)="closeEmitter.emit()"
     >close
     </button>
-    <button type="submit">
+    <button type="submit"
+            (click)="saveDish()">
       save
     </button>
   </div>

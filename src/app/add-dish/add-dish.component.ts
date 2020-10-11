@@ -1,6 +1,7 @@
 import {Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ProductService} from '../shared/services/product.service';
 import {Dish, DishProduct, Product} from '../shared/interfaces';
+import {DishService} from '../shared/services/dish.service';
 
 @Component({
   selector: 'app-add-dish',
@@ -27,11 +28,12 @@ export class AddDishComponent implements OnInit {
     eating: null,
     weightRaw: 0,
     weightCooked: 0,
-    dishProduct: []
+    dish_product: []
   };
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private dishService: DishService
   ) {
   }
 
@@ -53,7 +55,7 @@ export class AddDishComponent implements OnInit {
   }
 
   addProduct(product: Product): void {
-    this.dish.dishProduct.push({
+    this.dish.dish_product.push({
       dishProductId: null,
       product,
       eating: null,
@@ -82,6 +84,14 @@ export class AddDishComponent implements OnInit {
     this.dish.proteins = 0;
     this.dish.fats = 0;
     this.dish.carbohydrates = 0;
-    this.dish.dishProduct.forEach(setWeight);
+    this.dish.dish_product.forEach(setWeight);
+  }
+
+  saveDish(): void {
+    this.dishService.saveDish(this.dish).subscribe();
+  }
+
+  saveName($event): void {
+    this.dish.name = $event.target.value;
   }
 }

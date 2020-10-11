@@ -19,7 +19,7 @@ export interface Dish {
   eating: string;
   weightRaw: number;
   weightCooked: number;
-  dishProduct: DishProduct[];
+  dish_product: DishProduct[];
 }
 
 export interface Ration {
