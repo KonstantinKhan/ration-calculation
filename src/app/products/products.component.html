@@ -22,6 +22,11 @@
       <th>{{product.proteins}}</th>
       <th>{{product.fats}}</th>
       <th>{{product.carbohydrates}}</th>
+      <th *ngIf="product.verified">
+        <button>
+          edit
+        </button>
+      </th>
     </tr>
   </table>
 </div>
