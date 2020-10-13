@@ -28,6 +28,7 @@ export class AddDishComponent implements OnInit {
     eating: null,
     weightRaw: 0,
     weightCooked: 0,
+    verified: false,
     dish_product: []
   };
 

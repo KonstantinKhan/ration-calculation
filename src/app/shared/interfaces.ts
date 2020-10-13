@@ -19,6 +19,7 @@ export interface Dish {
   eating: string;
   weightRaw: number;
   weightCooked: number;
+  verified: boolean;
   dish_product: DishProduct[];
 }
 

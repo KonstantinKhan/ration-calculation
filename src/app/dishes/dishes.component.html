@@ -18,12 +18,19 @@
       <th>Жиры, г</th>
       <th>Угеводы, г</th>
     </tr>
-    <tr *ngFor="let product of dishes">
-      <th>{{product.name}}</th>
-      <th>{{product.calories | number: '1.1-1'}}</th>
-      <th>{{product.proteins | number: '1.1-1'}}</th>
-      <th>{{product.fats | number: '1.1-1'}}</th>
-      <th>{{product.carbohydrates | number: '1.1-1'}}</th>
+    <tr *ngFor="let dish of dishes">
+      <th>{{dish.name}}</th>
+      <th>{{dish.calories | number: '1.1-1'}}</th>
+      <th>{{dish.proteins | number: '1.1-1'}}</th>
+      <th>{{dish.fats | number: '1.1-1'}}</th>
+      <th>{{dish.carbohydrates | number: '1.1-1'}}</th>
+      <th
+        *ngIf="dish.verified"
+      >
+        <button>
+          edit
+        </button>
+      </th>
     </tr>
   </table>
 </div>
