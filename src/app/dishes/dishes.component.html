@@ -20,10 +20,10 @@
     </tr>
     <tr *ngFor="let product of dishes">
       <th>{{product.name}}</th>
-      <th>{{product.calories}}</th>
-      <th>{{product.proteins}}</th>
-      <th>{{product.fats}}</th>
-      <th>{{product.carbohydrates}}</th>
+      <th>{{product.calories | number: '1.1-1'}}</th>
+      <th>{{product.proteins | number: '1.1-1'}}</th>
+      <th>{{product.fats | number: '1.1-1'}}</th>
+      <th>{{product.carbohydrates | number: '1.1-1'}}</th>
     </tr>
   </table>
 </div>

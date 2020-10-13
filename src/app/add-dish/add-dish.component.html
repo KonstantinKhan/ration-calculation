@@ -10,12 +10,11 @@
         (input)="saveName($event)">
       </h1>
       <div class="row col-12">
-        <p></p>
-        <div class="col-2">{{dish.calories}}</div>
-        <div class="col-2">{{dish.proteins}}</div>
-        <div class="col-2">{{dish.fats}}</div>
-        <div class="col-2">{{dish.calories}}</div>
-        <div class="col-2">{{dish.weightRaw}}</div>
+        <div class="col-2">{{dish.calories | number: '1.1-1'}}</div>
+        <div class="col-2">{{dish.proteins| number: '1.1-1'}}</div>
+        <div class="col-2">{{dish.fats | number: '1.1-1'}}</div>
+        <div class="col-2">{{dish.calories | number: '1.1-1'}}</div>
+        <div class="col-2">{{dish.weightRaw | number: '1.1-1'}}</div>
       </div>
     </div>
     <input
@@ -46,14 +45,14 @@
         </tr>
         <tr *ngFor="let product of dish.dish_product">
           <th>{{product.product.name}}</th>
-          <th>{{product.product.calories}}</th>
-          <th>{{product.product.proteins}}</th>
-          <th>{{product.product.fats}}</th>
-          <th>{{product.product.carbohydrates}}</th>
+          <th>{{product.product.calories | number: '1.1-1'}}</th>
+          <th>{{product.product.proteins | number: '1.1-1'}}</th>
+          <th>{{product.product.fats | number: '1.1-1'}}</th>
+          <th>{{product.product.carbohydrates | number: '1.1-1'}}</th>
           <th>
             <input type="number"
                    placeholder="Укажите вес"
-                   (input)="serWeightComponent(product, $event)">
+                   (input)="setWeightComponent(product, $event)">
           </th>
         </tr>
       </table>
