@@ -14,10 +14,12 @@ export class AddDishComponent implements OnInit {
   @ViewChild('searchResult') searchResult;
 
   @Input() title;
+  @Input() d: Dish;
   @Output() closeEmitter = new EventEmitter<void>();
 
   searchComponent = '';
   searchResults: Product[] = [];
+
   dish: Dish = {
     dishId: null,
     name: null,
@@ -39,6 +41,9 @@ export class AddDishComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.d != null) {
+      this.dish = this.d;
+    }
   }
 
   @HostListener('click', ['$event'])
@@ -59,7 +64,6 @@ export class AddDishComponent implements OnInit {
     this.dish.dish_product.push({
       dishProductId: null,
       product,
-      eating: null,
       weight: 0
     });
     this.searchComponent = '';
@@ -98,6 +102,7 @@ export class AddDishComponent implements OnInit {
   }
 
   saveDish(): void {
+    console.log(this.dish.dishId);
     this.dishService.saveDish(this.dish).subscribe();
   }
 

@@ -44,7 +44,6 @@ export interface RationProduct {
 export interface DishProduct {
   dishProductId: number;
   product: Product;
-  eating: string;
   weight: number;
 }
 

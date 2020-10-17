@@ -7,7 +7,8 @@
       <h1>
         <input class="col-12" type="text"
                placeholder="Введите название блюда"
-        (input)="saveName($event)">
+               value="{{title}}"
+               (input)="saveName($event)">
       </h1>
       <div class="row col-12">
         <div class="col-2">{{dish.calories | number: '1.1-1'}}</div>
@@ -52,6 +53,7 @@
           <th>
             <input type="number"
                    placeholder="Укажите вес"
+                   value="{{product.weight}}"
                    (input)="setWeightComponent(product, $event)">
           </th>
         </tr>

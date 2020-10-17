@@ -1,3 +1,8 @@
 .verified-dish {
   background-color: palegreen;
 }
+
+.entry-dish :hover {
+  background-color: azure;
+  cursor: pointer;
+}

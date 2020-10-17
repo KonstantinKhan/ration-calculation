@@ -16,7 +16,7 @@ export class DishService {
   }
 
   getAllDishes(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(`${environment.dbUrl}/dishes/all.json`);
+    return this.http.get<Dish[]>(`${environment.dbUrl}/dishes/all.json`, {headers: this.auth.getHeaderAuth()});
   }
 
   saveDish(dish: Dish): Observable<Dish> {

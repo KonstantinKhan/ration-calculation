@@ -13,6 +13,8 @@ export class DishesComponent implements OnInit {
 
   dishes: Dish[];
 
+  modalFactory = this.resolver.resolveComponentFactory(AddDishComponent);
+
   @ViewChild(RefDirective) refDir: RefDirective;
 
   constructor(
@@ -28,11 +30,19 @@ export class DishesComponent implements OnInit {
   }
 
   showNewDish(): void {
-    const modalFactory = this.resolver.resolveComponentFactory(AddDishComponent);
-    this.refDir.containerRef.clear();
-    const component = this.refDir.containerRef.createComponent(modalFactory);
+    const component = this.refDir.containerRef.createComponent(this.modalFactory);
 
-    component.instance.title = 'Новое блюдо';
+    component.instance.closeEmitter.subscribe(() => {
+      this.refDir.containerRef.clear();
+    });
+  }
+
+  showEditDish(dish: Dish): void {
+    const component = this.refDir.containerRef.createComponent(this.modalFactory);
+
+    component.instance.title = dish.name;
+    component.instance.d = dish;
+
     component.instance.closeEmitter.subscribe(() => {
       this.refDir.containerRef.clear();
     });
