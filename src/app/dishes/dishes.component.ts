@@ -38,6 +38,7 @@ export class DishesComponent implements OnInit {
   }
 
   showEditDish(dish: Dish): void {
+
     const component = this.refDir.containerRef.createComponent(this.modalFactory);
 
     component.instance.title = dish.name;

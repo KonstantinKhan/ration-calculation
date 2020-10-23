@@ -27,13 +27,6 @@
       <th>{{dish.proteins | number: '1.1-1'}}</th>
       <th>{{dish.fats | number: '1.1-1'}}</th>
       <th>{{dish.carbohydrates | number: '1.1-1'}}</th>
-      <th
-        *ngIf="dish.verified"
-      >
-        <button>
-          edit
-        </button>
-      </th>
     </tr>
     </tbody>
   </table>

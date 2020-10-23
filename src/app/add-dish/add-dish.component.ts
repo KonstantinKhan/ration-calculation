@@ -20,19 +20,7 @@ export class AddDishComponent implements OnInit {
   searchComponent = '';
   searchResults: Product[] = [];
 
-  dish: Dish = {
-    dishId: null,
-    name: null,
-    calories: 0,
-    proteins: 0,
-    fats: 0,
-    carbohydrates: 0,
-    eating: null,
-    weightRaw: 0,
-    weightCooked: 0,
-    verified: false,
-    dish_product: []
-  };
+  dish: Dish;
 
   constructor(
     private productService: ProductService,
@@ -42,16 +30,30 @@ export class AddDishComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.d != null) {
-      this.dish = this.d;
+      this.dish = JSON.parse(JSON.stringify(this.d));
+    } else {
+      this.dish = {
+        dishId: null,
+        name: null,
+        calories: 0,
+        proteins: 0,
+        fats: 0,
+        carbohydrates: 0,
+        eating: null,
+        weightRaw: 0,
+        weightCooked: 0,
+        verified: false,
+        dish_product: []
+      };
     }
   }
 
   @HostListener('click', ['$event'])
   onClick(event): void {
-    if (!this.addDishForm.nativeElement.contains(event.target) &&
-      this.searchResults.length === 0) {
-      this.closeEmitter.emit();
-    }
+    // if (!this.addDishForm.nativeElement.contains(event.target) &&
+    //   this.searchResults.length === 0) {
+    //   this.closeEmitter.emit();
+    // }
   }
 
   search(): void {
@@ -102,11 +104,29 @@ export class AddDishComponent implements OnInit {
   }
 
   saveDish(): void {
-    console.log(this.dish.dishId);
     this.dishService.saveDish(this.dish).subscribe();
   }
 
   saveName($event): void {
     this.dish.name = $event.target.value;
+  }
+
+  // Метод для удаления продукта из блюда
+  deleteProduct(dishProduct: DishProduct): void {
+    const index = this.dish.dish_product.indexOf(dishProduct, 0);
+    if (index > -1) {
+      this.dish.dish_product.splice(index, 1);
+    }
+    this.updateDish();
+  }
+
+  // Метод для замены продукта в блюде
+  replaceProduct(): void {
+
+  }
+
+  // Метод для закрытия окна окна работы с блюдом
+  close(): void {
+    this.closeEmitter.emit();
   }
 }

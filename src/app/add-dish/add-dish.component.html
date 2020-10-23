@@ -19,7 +19,7 @@
       </div>
     </div>
     <input
-      #inputSearch
+      *ngIf="dish.verified"
       type="text"
       placeholder="Выберите продукт"
       [(ngModel)]="searchComponent"
@@ -44,24 +44,39 @@
           <th>Углеводы, г</th>
           <th>Вес, г</th>
         </tr>
-        <tr *ngFor="let product of dish.dish_product">
-          <th>{{product.product.name}}</th>
-          <th>{{product.product.calories | number: '1.1-1'}}</th>
-          <th>{{product.product.proteins | number: '1.1-1'}}</th>
-          <th>{{product.product.fats | number: '1.1-1'}}</th>
-          <th>{{product.product.carbohydrates | number: '1.1-1'}}</th>
+        <tr *ngFor="let dish_product of dish.dish_product">
+          <th>{{dish_product.product.name}}</th>
+          <th>{{dish_product.product.calories | number: '1.1-1'}}</th>
+          <th>{{dish_product.product.proteins | number: '1.1-1'}}</th>
+          <th>{{dish_product.product.fats | number: '1.1-1'}}</th>
+          <th>{{dish_product.product.carbohydrates | number: '1.1-1'}}</th>
           <th>
             <input type="number"
                    placeholder="Укажите вес"
-                   value="{{product.weight}}"
-                   (input)="setWeightComponent(product, $event)">
+                   value="{{dish_product.weight}}"
+                   (input)="setWeightComponent(dish_product, $event)">
+          </th>
+          <th
+            *ngIf="dish.verified"
+          >
+            <button
+              (click)="deleteProduct(dish_product)"
+            >del
+            </button>
+          </th>
+          <th
+            *ngIf="dish.verified">
+            <button
+              (click)="replaceProduct()"
+            >replace
+            </button>
           </th>
         </tr>
       </table>
     </div>
     <button
       type="button"
-      (click)="closeEmitter.emit()"
+      (click)="close()"
     >close
     </button>
     <button type="submit"
