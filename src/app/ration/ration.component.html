@@ -49,7 +49,8 @@
         <p
           #suggestionsBreakfast
           *ngFor="let component of componentsSearchBreakfast"
-          (click)="addComponent(component, 'b')">
+          (click)="addComponent(component, 'b')"
+        >
           {{component.name}}
         </p>
       </div>

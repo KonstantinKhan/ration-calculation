@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {DateService} from '../shared/services/date.service';
-import {Dish, Product, Ration, RationProduct} from '../shared/interfaces';
+import {DataComponent, Dish, Product, Ration, RationProduct} from '../shared/interfaces';
 import {Subscription} from 'rxjs';
 import {ProductService} from '../shared/services/product.service';
 import {DishService} from '../shared/services/dish.service';
@@ -36,7 +36,7 @@ export class RationComponent implements OnInit {
   searchComponentLunch = '';
   searchComponentDinner = '';
   searchComponentSnack = '';
-  componentsSearchBreakfast: Product[] | Dish[] = [];
+  componentsSearchBreakfast: DataComponent[] = [];
   componentsSearchLunch: Product[] | Dish[] = [];
   componentsSearchDinner: Product[] | Dish[] = [];
   componentsSearchSnack: Product[] | Dish[] = [];
@@ -132,12 +132,17 @@ export class RationComponent implements OnInit {
   }
 
   searchProducts(eating: string): void {
+    this.componentsSearchBreakfast.length = 0;
     switch (eating) {
       case 'b':
         if (this.searchComponentBreakfast.trim()) {
           this.pSub = this.productService.getSearchProducts(this.searchComponentBreakfast)
             .subscribe((products: Product[]) => {
-              this.componentsSearchBreakfast = products;
+              this.componentsSearchBreakfast = this.componentsSearchBreakfast.concat(products);
+            });
+          this.dSub = this.dishesService.getSearchDish(this.searchComponentBreakfast)
+            .subscribe((dishes: Dish[]) => {
+              this.componentsSearchBreakfast = this.componentsSearchBreakfast.concat(dishes);
             });
           /*this.dSub = this.dishesService.getSearchDish(this.searchComponent).subscribe((data: Dish[]) => {
             this.components = this.components.concat(data);

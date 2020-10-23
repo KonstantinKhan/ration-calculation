@@ -1,21 +1,19 @@
-export interface Product {
-  productId: number;
+export interface DataComponent {
   name: string;
   calories: number;
   proteins: number;
   fats: number;
   carbohydrates: number;
+}
+
+export interface Product extends DataComponent{
+  productId: number;
   verified: boolean;
   userId: number;
 }
 
-export interface Dish {
+export interface Dish extends DataComponent{
   dishId: number;
-  name: string;
-  calories: number;
-  proteins: number;
-  fats: number;
-  carbohydrates: number;
   eating: string;
   weightRaw: number;
   weightCooked: number;
