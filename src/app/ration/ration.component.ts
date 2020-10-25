@@ -36,6 +36,8 @@ export class RationComponent implements OnInit {
   searchComponentLunch = '';
   searchComponentDinner = '';
   searchComponentSnack = '';
+  componentSearchProduct: Product[] = [];
+  componentSearchDish: Dish[] = [];
   componentsSearchBreakfast: DataComponent[] = [];
   componentsSearchLunch: Product[] | Dish[] = [];
   componentsSearchDinner: Product[] | Dish[] = [];
@@ -132,23 +134,20 @@ export class RationComponent implements OnInit {
   }
 
   searchProducts(eating: string): void {
-    this.componentsSearchBreakfast.length = 0;
     switch (eating) {
       case 'b':
         if (this.searchComponentBreakfast.trim()) {
           this.pSub = this.productService.getSearchProducts(this.searchComponentBreakfast)
             .subscribe((products: Product[]) => {
-              this.componentsSearchBreakfast = this.componentsSearchBreakfast.concat(products);
+              this.componentSearchProduct = products;
             });
           this.dSub = this.dishesService.getSearchDish(this.searchComponentBreakfast)
             .subscribe((dishes: Dish[]) => {
-              this.componentsSearchBreakfast = this.componentsSearchBreakfast.concat(dishes);
+              this.componentSearchDish = dishes;
             });
-          /*this.dSub = this.dishesService.getSearchDish(this.searchComponent).subscribe((data: Dish[]) => {
-            this.components = this.components.concat(data);
-          });*/
         } else {
-          this.componentsSearchBreakfast.length = 0;
+          this.componentSearchProduct.length = 0;
+          this.componentSearchDish.length = 0;
         }
         break;
       // case 'l':
@@ -190,12 +189,12 @@ export class RationComponent implements OnInit {
     }
   }
 
-  addComponent(component: Product, e: string): void {
-    const rationProduct: RationProduct = {rationProductId: 0, product: component, weight: 0, eating: e};
-    this.rationService.addProduct(this.dateService.dateToStringFormat(this.dateService.currentDate()), rationProduct)
-      .subscribe((ration) => {
-        this.update(ration);
-      });
+  addComponent(component: DataComponent, e: string): void {
+    // const rationProduct: RationProduct = {rationProductId: 0, product: component, weight: 0, eating: e};
+    // this.rationService.addProduct(this.dateService.dateToStringFormat(this.dateService.currentDate()), rationProduct)
+    //   .subscribe((ration) => {
+    //     this.update(ration);
+    //   });
     this.breakfastComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
     this.lunchComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
     this.dinnerComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));

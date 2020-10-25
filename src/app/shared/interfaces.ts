@@ -6,13 +6,13 @@ export interface DataComponent {
   carbohydrates: number;
 }
 
-export interface Product extends DataComponent{
+export interface Product extends DataComponent {
   productId: number;
   verified: boolean;
   userId: number;
 }
 
-export interface Dish extends DataComponent{
+export interface Dish extends DataComponent {
   dishId: number;
   eating: string;
   weightRaw: number;

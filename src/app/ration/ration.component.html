@@ -45,15 +45,28 @@
 
       <div
         class="search-results col-12"
-        *ngIf="componentsSearchBreakfast.length > 0">
+        *ngIf="componentSearchProduct.length + componentSearchDish.length > 0">
         <p
-          #suggestionsBreakfast
-          *ngFor="let component of componentsSearchBreakfast"
-          (click)="addComponent(component, 'b')"
+          *ngFor="let product of componentSearchProduct"
+          (click)="addComponent(product, 'b')"
         >
-          {{component.name}}
+          {{product.name}}
+        </p>
+        <p
+          *ngFor="let dish of componentSearchDish"
+        >
+          {{dish.name}}
         </p>
       </div>
+<!--      <div-->
+<!--        class="search-results col-12"-->
+<!--        *ngIf="componentSearchDish.length > 0">-->
+<!--        <p-->
+<!--          *ngFor="let dish of componentSearchDish"-->
+<!--        >-->
+<!--          {{dish.name}}-->
+<!--        </p>-->
+<!--      </div>-->
 
     </div>
 
