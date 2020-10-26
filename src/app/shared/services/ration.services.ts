@@ -32,7 +32,8 @@ export class RationServices {
   }
 
   deleteProduct(date: string, id: number): Observable<Ration> {
-    return this.http.patch<Ration>(`${environment.dbUrl}/delete_product/ration/` + date + `.json`, id);
+    return this.http.patch<Ration>(`${environment.dbUrl}/delete_product/ration/` + date + `.json`,
+      id, {headers: this.auth.getHeaderAuth()});
   }
 
   clearRation(date: string): Observable<Ration> {

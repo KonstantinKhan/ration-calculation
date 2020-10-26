@@ -189,12 +189,12 @@ export class RationComponent implements OnInit {
     }
   }
 
-  addComponent(component: DataComponent, e: string): void {
-    // const rationProduct: RationProduct = {rationProductId: 0, product: component, weight: 0, eating: e};
-    // this.rationService.addProduct(this.dateService.dateToStringFormat(this.dateService.currentDate()), rationProduct)
-    //   .subscribe((ration) => {
-    //     this.update(ration);
-    //   });
+  addProduct(product: Product, e: string): void {
+    const rationProduct: RationProduct = {rationProductId: 0, product, weight: 0, eating: e};
+    this.rationService.addProduct(this.dateService.dateToStringFormat(this.dateService.currentDate()), rationProduct)
+      .subscribe((ration) => {
+        this.update(ration);
+      });
     this.breakfastComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
     this.lunchComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
     this.dinnerComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
@@ -202,7 +202,8 @@ export class RationComponent implements OnInit {
 
     switch (e) {
       case 'b':
-        this.componentsSearchBreakfast.length = 0;
+        this.componentSearchProduct.length = 0;
+        this.componentSearchDish.length = 0;
         this.searchComponentBreakfast = '';
         break;
       case 'l':
@@ -228,9 +229,10 @@ export class RationComponent implements OnInit {
   }
 
   deleteProduct(id: number): void {
-    this.rationService.deleteProduct(this.dateService.dateToStringFormat(new Date(this.ration.date)), id).subscribe(value => {
-      this.update(value);
-    });
+    this.rationService.deleteProduct(this.dateService.dateToStringFormat(new Date(this.ration.date)), id)
+      .subscribe(value => {
+        this.update(value);
+      });
   }
 
   update(ration: Ration): void {
