@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {DateService} from '../shared/services/date.service';
-import {DataComponent, Dish, Product, Ration, RationProduct} from '../shared/interfaces';
+import {DataComponent, Dish, Product, Ration, RationDish, RationProduct} from '../shared/interfaces';
 import {Subscription} from 'rxjs';
 import {ProductService} from '../shared/services/product.service';
 import {DishService} from '../shared/services/dish.service';
@@ -27,10 +27,14 @@ export class RationComponent implements OnInit {
   pSub: Subscription;
   dSub: Subscription;
 
-  breakfastComposition: RationProduct[] = [];
-  lunchComposition: RationProduct[] = [];
-  dinnerComposition: RationProduct[] = [];
-  snackComposition: RationProduct[] = [];
+  breakfastProducts: RationProduct[] = [];
+  breakfastDishes: RationDish[] = [];
+  lunchProducts: RationProduct[] = [];
+  lunchDishes: RationDish[] = [];
+  dinnerProducts: RationProduct[] = [];
+  dinnerDishes: RationDish[] = [];
+  snackProducts: RationProduct[] = [];
+  snackDishes: RationDish[] = [];
 
   searchComponentBreakfast = '';
   searchComponentLunch = '';
@@ -87,25 +91,41 @@ export class RationComponent implements OnInit {
         this.ration.ration_product.forEach(value => {
           switch (value.eating) {
             case 'b':
-              this.breakfastComposition.push(value);
+              this.breakfastProducts.push(value);
               break;
             case 'l':
-              this.lunchComposition.push(value);
+              this.lunchProducts.push(value);
               break;
             case 'd':
-              this.dinnerComposition.push(value);
+              this.dinnerProducts.push(value);
               break;
             case 's':
-              this.snackComposition.push(value);
+              this.snackProducts.push(value);
+              break;
+          }
+        });
+        this.ration.ration_dish.forEach(value => {
+          switch (value.eating) {
+            case 'b':
+              this.breakfastDishes.push(value);
+              break;
+            case 'l':
+              this.breakfastDishes.push(value);
+              break;
+            case 'd':
+              this.breakfastDishes.push(value);
+              break;
+            case 's':
+              this.breakfastDishes.push(value);
               break;
           }
         });
       }
 
-      this.breakfastComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
-      this.lunchComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
-      this.dinnerComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
-      this.snackComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+      this.breakfastProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+      this.lunchProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+      this.dinnerProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+      this.snackProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
 
     });
   }
@@ -195,10 +215,10 @@ export class RationComponent implements OnInit {
       .subscribe((ration) => {
         this.update(ration);
       });
-    this.breakfastComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
-    this.lunchComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
-    this.dinnerComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
-    this.snackComposition.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+    this.breakfastProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+    this.lunchProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+    this.dinnerProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+    this.snackProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
 
     switch (e) {
       case 'b':
@@ -221,11 +241,52 @@ export class RationComponent implements OnInit {
     }
   }
 
-  updateWeight(rationProduct: RationProduct, e: any): void {
+  addDish(dish: Dish, e: string): void {
+    const rationDish: RationDish = {rationDishId: 0, dish, weight: 0, eating: e};
+    this.rationService.addDish(this.dateService.dateToStringFormat(this.dateService.currentDate()), rationDish)
+      .subscribe((ration: Ration) => {
+        this.update(ration);
+      });
+    this.breakfastProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+    this.lunchProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+    this.dinnerProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+    this.snackProducts.sort((a, b) => this.sortAlphaBet(a.product, b.product));
+
+    switch (e) {
+      case 'b':
+        this.componentSearchProduct.length = 0;
+        this.componentSearchDish.length = 0;
+        this.searchComponentBreakfast = '';
+        break;
+      case 'l':
+        this.componentsSearchLunch.length = 0;
+        this.searchComponentLunch = '';
+        break;
+      case 'd':
+        this.componentsSearchDinner.length = 0;
+        this.searchComponentDinner = '';
+        break;
+      case 's':
+        this.componentsSearchSnack.length = 0;
+        this.searchComponentSnack = '';
+        break;
+    }
+  }
+
+  updateWeightByProduct(rationProduct: RationProduct, e: any): void {
     rationProduct.weight = e.target.value;
-    this.rationService.updateRation(this.dateService.dateToStringFormat(new Date(this.ration.date)), rationProduct).subscribe(value => {
-      this.ration = value;
-    });
+    this.rationService.updateRationByProduct(this.dateService.dateToStringFormat(new Date(this.ration.date)), rationProduct)
+      .subscribe(value => {
+        this.ration = value;
+      });
+  }
+
+  updateWeightByDish(rationDish: RationDish, e: any): void {
+    rationDish.weight = e.target.value;
+    this.rationService.updateRationByDish(this.dateService.dateToStringFormat(new Date(this.ration.date)), rationDish)
+      .subscribe(value => {
+        this.ration = value;
+      });
   }
 
   deleteProduct(id: number): void {
@@ -237,23 +298,40 @@ export class RationComponent implements OnInit {
 
   update(ration: Ration): void {
     this.ration = ration;
-    this.breakfastComposition.length = 0;
-    this.lunchComposition.length = 0;
-    this.dinnerComposition.length = 0;
-    this.snackComposition.length = 0;
+    this.breakfastProducts.length = 0;
+    this.breakfastDishes.length = 0;
+    this.lunchProducts.length = 0;
+    this.dinnerProducts.length = 0;
+    this.snackProducts.length = 0;
     this.ration.ration_product.forEach(v => {
       switch (v.eating) {
         case 'b':
-          this.breakfastComposition.push(v);
+          this.breakfastProducts.push(v);
           break;
         case 'l':
-          this.lunchComposition.push(v);
+          this.lunchProducts.push(v);
           break;
         case 'd':
-          this.dinnerComposition.push(v);
+          this.dinnerProducts.push(v);
           break;
         case 's':
-          this.snackComposition.push(v);
+          this.snackProducts.push(v);
+          break;
+      }
+    });
+    this.ration.ration_dish.forEach(v => {
+      switch (v.eating) {
+        case 'b':
+          this.breakfastDishes.push(v);
+          break;
+        case 'l':
+          this.lunchDishes.push(v);
+          break;
+        case 'd':
+          this.dinnerDishes.push(v);
+          break;
+        case 's':
+          this.snackDishes.push(v);
           break;
       }
     });
@@ -263,5 +341,12 @@ export class RationComponent implements OnInit {
     this.rationService.clearRation(this.dateService.dateToStringFormat(new Date(this.ration.date))).subscribe(ration => {
       this.update(ration);
     });
+  }
+
+  deleteDish(id: number): void {
+    this.rationService.deleteDish(this.dateService.dateToStringFormat(new Date(this.ration.date)), id)
+      .subscribe(value => {
+        this.update(value);
+      });
   }
 }

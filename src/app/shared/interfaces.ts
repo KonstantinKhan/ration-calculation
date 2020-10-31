@@ -30,11 +30,19 @@ export interface Ration {
   carbohydrates: number;
   userId: number;
   ration_product: RationProduct[];
+  ration_dish: RationDish[];
 }
 
 export interface RationProduct {
   rationProductId: number;
   product: Product;
+  weight: number;
+  eating: string;
+}
+
+export interface RationDish {
+  rationDishId: number;
+  dish: Dish;
   weight: number;
   eating: string;
 }
