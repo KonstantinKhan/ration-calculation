@@ -1,0 +1,84 @@
+<div class="backdrop">
+  <div
+    class="add-window"
+    #editDishForm
+  >
+    <div>
+      <h1>
+        <input class="col-12" type="text"
+               placeholder="Введите название блюда"
+               value="{{title}}"
+               (input)="saveName($event)">
+      </h1>
+      <div class="row col-12">
+        <div class="col-2">{{dish.calories | number: '1.1-1'}}</div>
+        <div class="col-2">{{dish.proteins| number: '1.1-1'}}</div>
+        <div class="col-2">{{dish.fats | number: '1.1-1'}}</div>
+        <div class="col-2">{{dish.calories | number: '1.1-1'}}</div>
+        <div class="col-2">{{dish.weightRaw | number: '1.1-1'}}</div>
+      </div>
+    </div>
+    <input
+      type="text"
+      placeholder="Выберите продукт"
+      [(ngModel)]="searchComponent"
+      (input)="search()"
+    >
+    <div
+      class="search-results"
+      *ngIf="searchComponent.length > 0">
+      <p
+        #searchResult
+        *ngFor="let product of searchResults"
+        (click)="addProduct(product)"
+      >{{product.name}}</p>
+    </div>
+    <div>
+      <table border="1">
+        <tr>
+          <th>Название продукта</th>
+          <th>Калорийность, ккал</th>
+          <th>Белки, г</th>
+          <th>Жиры, г</th>
+          <th>Углеводы, г</th>
+          <th>Вес, г</th>
+        </tr>
+        <tr *ngFor="let dish_product of dish.dish_product">
+          <th>{{dish_product.product.name}}</th>
+          <th>{{dish_product.product.calories | number: '1.1-1'}}</th>
+          <th>{{dish_product.product.proteins | number: '1.1-1'}}</th>
+          <th>{{dish_product.product.fats | number: '1.1-1'}}</th>
+          <th>{{dish_product.product.carbohydrates | number: '1.1-1'}}</th>
+          <th>
+            <input type="number"
+                   placeholder="Укажите вес"
+                   value="{{dish_product.weight}}"
+                   (input)="setWeightComponent(dish_product, $event)">
+          </th>
+          <th
+          >
+            <button
+              (click)="deleteProduct(dish_product)"
+            >del
+            </button>
+          </th>
+          <th>
+            <button
+              (click)="replaceProduct()"
+            >replace
+            </button>
+          </th>
+        </tr>
+      </table>
+    </div>
+    <button
+      type="button"
+      (click)="close()"
+    >close
+    </button>
+    <button type="submit"
+            (click)="saveDish()">
+      save
+    </button>
+  </div>
+</div>
