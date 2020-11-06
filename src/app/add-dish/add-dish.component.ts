@@ -1,6 +1,6 @@
 import {Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ProductService} from '../shared/services/product.service';
-import {Dish, DishProduct, Product} from '../shared/interfaces';
+import {Dish, DishProduct, DishTemplate, DishTemplateProduct, Product} from '../shared/interfaces';
 import {DishService} from '../shared/services/dish.service';
 
 @Component({
@@ -14,13 +14,13 @@ export class AddDishComponent implements OnInit {
   @ViewChild('searchResult') searchResult;
 
   @Input() title;
-  @Input() d: Dish;
+  @Input() d: DishTemplate;
   @Output() closeEmitter = new EventEmitter<void>();
 
   searchComponent = '';
   searchResults: Product[] = [];
 
-  dish: Dish;
+  dish: DishTemplate;
 
   constructor(
     private productService: ProductService,
@@ -33,17 +33,16 @@ export class AddDishComponent implements OnInit {
       this.dish = JSON.parse(JSON.stringify(this.d));
     } else {
       this.dish = {
-        dishId: null,
+        dishTemplateId: null,
         name: null,
         calories: 0,
         proteins: 0,
         fats: 0,
         carbohydrates: 0,
-        eating: null,
         weightRaw: 0,
         weightCooked: 0,
         verified: false,
-        dish_product: []
+        dishTemplate_product: []
       };
     }
   }
@@ -63,15 +62,15 @@ export class AddDishComponent implements OnInit {
   }
 
   addProduct(product: Product): void {
-    this.dish.dish_product.push({
-      dishProductId: null,
+    this.dish.dishTemplate_product.push({
+      dishTemplateProductId: null,
       product,
       weight: 0
     });
     this.searchComponent = '';
   }
 
-  setWeightComponent(dishProduct: DishProduct, $event): void {
+  setWeightComponent(dishProduct: DishTemplateProduct, $event): void {
     const weightComponent = $event.target.value;
     dishProduct.weight = weightComponent;
     this.updateDish();
@@ -82,7 +81,7 @@ export class AddDishComponent implements OnInit {
     let allProteins = 0;
     let allFats = 0;
     let allCarbohydrates = 0;
-    type FuncSum = (value: DishProduct) => void;
+    type FuncSum = (value: DishTemplateProduct) => void;
     const setWeight: FuncSum = (value): void => {
       this.dish.weightRaw += +value.weight;
       allCalories += +value.weight * value.product.calories / 100;
@@ -100,11 +99,12 @@ export class AddDishComponent implements OnInit {
     this.dish.fats = 0;
     this.dish.carbohydrates = 0;
 
-    this.dish.dish_product.forEach(setWeight);
+    this.dish.dishTemplate_product.forEach(setWeight);
   }
 
   saveDish(): void {
-    this.dishService.saveDish(this.dish).subscribe();
+    console.log(this.dish);
+    this.dishService.saveDishTemplate(this.dish).subscribe();
   }
 
   saveName($event): void {
@@ -112,10 +112,10 @@ export class AddDishComponent implements OnInit {
   }
 
   // Метод для удаления продукта из блюда
-  deleteProduct(dishProduct: DishProduct): void {
-    const index = this.dish.dish_product.indexOf(dishProduct, 0);
+  deleteProduct(dishProduct: DishTemplateProduct): void {
+    const index = this.dish.dishTemplate_product.indexOf(dishProduct, 0);
     if (index > -1) {
-      this.dish.dish_product.splice(index, 1);
+      this.dish.dishTemplate_product.splice(index, 1);
     }
     this.updateDish();
   }

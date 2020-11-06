@@ -19,7 +19,7 @@
       </div>
     </div>
     <input
-      *ngIf="dish.verified"
+      *ngIf="!dish.verified"
       type="text"
       placeholder="Выберите продукт"
       [(ngModel)]="searchComponent"
@@ -44,7 +44,7 @@
           <th>Углеводы, г</th>
           <th>Вес, г</th>
         </tr>
-        <tr *ngFor="let dish_product of dish.dish_product">
+        <tr *ngFor="let dish_product of dish.dishTemplate_product">
           <th>{{dish_product.product.name}}</th>
           <th>{{dish_product.product.calories | number: '1.1-1'}}</th>
           <th>{{dish_product.product.proteins | number: '1.1-1'}}</th>

@@ -17,8 +17,15 @@ export interface Dish extends DataComponent {
   eating: string;
   weightRaw: number;
   weightCooked: number;
-  verified: boolean;
   dish_product: DishProduct[];
+}
+
+export interface DishTemplate extends DataComponent {
+  dishTemplateId: number;
+  weightRaw: number;
+  weightCooked: number;
+  verified: boolean;
+  dishTemplate_product: DishTemplateProduct[];
 }
 
 export interface Ration {
@@ -49,6 +56,12 @@ export interface RationDish {
 
 export interface DishProduct {
   dishProductId: number;
+  product: Product;
+  weight: number;
+}
+
+export interface DishTemplateProduct {
+  dishTemplateProductId: number;
   product: Product;
   weight: number;
 }

@@ -1,3 +1,5 @@
+<ng-template appRef></ng-template>
+
 <div class="container-fluid">
 
   <header>
@@ -46,12 +48,15 @@
       <div
         class="search-results col-12"
         *ngIf="componentSearchProduct.length + componentSearchDish.length > 0">
+        <p>Продукты</p>
         <p
           *ngFor="let product of componentSearchProduct"
           (click)="addProduct(product, 'b')"
         >
           {{product.name}}
         </p>
+        <hr>
+        <p>Блюда</p>
         <p
           *ngFor="let dish of componentSearchDish"
           (click)="addDish(dish, 'b')"
@@ -93,6 +98,7 @@
           <div class="row">
             <p class="col-9">Вес, г</p>
             <input class="col-3"
+                   type="number"
                    maxlength="4"
                    (input)="updateWeightByProduct(product, $event)"
                    value="{{product.weight}}">
@@ -129,9 +135,11 @@
         <div class="col-5">
           <h5 class="text-center">{{dish.dish.name}}</h5>
           <button (click)="deleteDish(dish.rationDishId)">del</button>
+          <button (click)="editDish(dish)">edit</button>
           <div class="row">
             <p class="col-9">Вес, г</p>
             <input class="col-3"
+                   type="number"
                    maxlength="4"
                    (input)="updateWeightByDish(dish, $event)"
                    value="{{dish.weight}}">

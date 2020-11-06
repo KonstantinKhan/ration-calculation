@@ -1,11 +1,14 @@
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, HostListener, OnInit, ViewChild} from '@angular/core';
 import {DateService} from '../shared/services/date.service';
-import {DataComponent, Dish, Product, Ration, RationDish, RationProduct} from '../shared/interfaces';
+import {DataComponent, Dish, DishProduct, DishTemplate, Product, Ration, RationDish, RationProduct} from '../shared/interfaces';
 import {Subscription} from 'rxjs';
 import {ProductService} from '../shared/services/product.service';
 import {DishService} from '../shared/services/dish.service';
 import {RationServices} from '../shared/services/ration.services';
 import {DatePipe} from '@angular/common';
+import {RefDirective} from '../ref.directive';
+import {AddDishComponent} from '../add-dish/add-dish.component';
+import {EditDishComponent} from '../edit-dish/edit-dish.component';
 
 @Component({
   selector: 'app-ration',
@@ -18,6 +21,9 @@ export class RationComponent implements OnInit {
   @ViewChild('inputLunch') inputLunch;
   @ViewChild('inputDinner') inputDinner;
   @ViewChild('inputSnack') inputSnack;
+  @ViewChild(RefDirective) refDir: RefDirective;
+
+  modalFactory = this.resolver.resolveComponentFactory(EditDishComponent);
 
   ration: Ration;
   product: Product;
@@ -41,7 +47,7 @@ export class RationComponent implements OnInit {
   searchComponentDinner = '';
   searchComponentSnack = '';
   componentSearchProduct: Product[] = [];
-  componentSearchDish: Dish[] = [];
+  componentSearchDish: DishTemplate[] = [];
   componentsSearchBreakfast: DataComponent[] = [];
   componentsSearchLunch: Product[] | Dish[] = [];
   componentsSearchDinner: Product[] | Dish[] = [];
@@ -52,7 +58,9 @@ export class RationComponent implements OnInit {
     public productService: ProductService,
     public dishesService: DishService,
     public rationService: RationServices,
-    public datePipe: DatePipe) {
+    public datePipe: DatePipe,
+    private resolver: ComponentFactoryResolver
+  ) {
   }
 
   @HostListener('click', ['$event'])
@@ -162,7 +170,7 @@ export class RationComponent implements OnInit {
               this.componentSearchProduct = products;
             });
           this.dSub = this.dishesService.getSearchDish(this.searchComponentBreakfast)
-            .subscribe((dishes: Dish[]) => {
+            .subscribe((dishes: DishTemplate[]) => {
               this.componentSearchDish = dishes;
             });
         } else {
@@ -241,8 +249,31 @@ export class RationComponent implements OnInit {
     }
   }
 
-  addDish(dish: Dish, e: string): void {
-    const rationDish: RationDish = {rationDishId: 0, dish, weight: 0, eating: e};
+  addDish(dish: DishTemplate, e: string): void {
+    // const rationDish: RationDish = {rationDishId: 0, dish, weight: 0, eating: e};
+    // const d: Dish = JSON.parse(JSON.stringify(dish));
+    const dishProduct: DishProduct[] = [];
+    console.log(dish);
+    dish.dishTemplate_product.forEach(value => {
+      dishProduct.push({
+        dishProductId: 0,
+        product: value.product,
+        weight: value.weight,
+      });
+    });
+    const d: Dish = {
+      dishId: 0,
+      eating: e,
+      name: dish.name,
+      calories: dish.calories,
+      proteins: dish.proteins,
+      fats: dish.fats,
+      carbohydrates: dish.carbohydrates,
+      dish_product: dishProduct,
+      weightRaw: dish.weightRaw,
+      weightCooked: dish.weightCooked
+    };
+    const rationDish: RationDish = {rationDishId: 0, dish: d, weight: 0, eating: e};
     this.rationService.addDish(this.dateService.dateToStringFormat(this.dateService.currentDate()), rationDish)
       .subscribe((ration: Ration) => {
         this.update(ration);
@@ -348,5 +379,23 @@ export class RationComponent implements OnInit {
       .subscribe(value => {
         this.update(value);
       });
+  }
+
+  editDish(rationDish: RationDish): void {
+
+    const component = this.refDir.containerRef.createComponent(this.modalFactory);
+
+    component.instance.title = rationDish.dish.name;
+    component.instance.d = rationDish.dish;
+    component.instance.rationDish = rationDish;
+    component.instance.date = this.ration.date.toString();
+    component.instance.ration = this.ration;
+
+    component.instance.closeEmitter.subscribe(() => {
+      this.rationService.getRation(this.ration.date.toString()).subscribe((ration: Ration) => {
+        this.ration = ration;
+      });
+      this.refDir.containerRef.clear();
+    });
   }
 }

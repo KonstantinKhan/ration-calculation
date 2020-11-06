@@ -1,6 +1,6 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
 import {DishService} from '../shared/services/dish.service';
-import {Dish} from '../shared/interfaces';
+import {Dish, DishTemplate} from '../shared/interfaces';
 import {AddDishComponent} from '../add-dish/add-dish.component';
 import {RefDirective} from '../ref.directive';
 
@@ -11,7 +11,7 @@ import {RefDirective} from '../ref.directive';
 })
 export class DishesComponent implements OnInit {
 
-  dishes: Dish[];
+  dishes: DishTemplate[];
 
   modalFactory = this.resolver.resolveComponentFactory(AddDishComponent);
 
@@ -24,7 +24,7 @@ export class DishesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dishService.getAllDishes().subscribe((dishes: Dish[]) => {
+    this.dishService.getAllDishes().subscribe((dishes: DishTemplate[]) => {
       this.dishes = dishes;
     });
   }
@@ -37,7 +37,7 @@ export class DishesComponent implements OnInit {
     });
   }
 
-  showEditDish(dish: Dish): void {
+  showEditDish(dish: DishTemplate): void {
 
     const component = this.refDir.containerRef.createComponent(this.modalFactory);
 

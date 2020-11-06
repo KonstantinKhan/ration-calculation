@@ -6,7 +6,7 @@ import {Environment} from './interface';
 
 export const environment = {
   production: false,
-  dbUrl: 'http://192.168.1.36:8080'
+  dbUrl: 'http://192.168.1.103:8080'
 };
 
 /*
