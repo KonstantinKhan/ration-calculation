@@ -1,49 +1,57 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <h2>Войти в приложение</h2>
+<div class="backdrop">
+  <form
+    class="login_page col-4"
+    [formGroup]="form" (ngSubmit)="submit()">
+    <h2>Вход</h2>
 
-  <div
-    [ngClass]="{invalid: form.get('userName').touched && form.get('userName').invalid}"
-  >
-    <label for="email">e-mail</label>
-    <input id=email type="email" formControlName="userName">
     <div
-      *ngIf="form.get('userName').touched && form.get('userName').invalid"
+      class="form-group"
+      [ngClass]="{invalid: form.get('userName').touched && form.get('userName').invalid}"
     >
-      <small *ngIf="form.get('userName').errors.required">
-        Введите e-mail
-      </small>
-      <small *ngIf="form.get('userName').errors.email">
-        Введите e-mail
-      </small>
+      <label for="email">E-mail</label>
+      <input id=email type="email" formControlName="userName">
+      <div
+        *ngIf="form.get('userName').touched && form.get('userName').invalid"
+      >
+        <small *ngIf="form.get('userName').errors.required">
+          Введите e-mail
+        </small>
+        <small *ngIf="form.get('userName').errors.email">
+          Введите e-mail
+        </small>
+      </div>
     </div>
-  </div>
 
-  <div
-    [ngClass]="{invalid: form.get('userPassword').touched && form.get('userPassword').invalid}"
-  >
-    <label for="password">password</label>
-    <input id=password type="password" formControlName="userPassword">
     <div
-      *ngIf="form.get('userPassword').touched && form.get('userPassword').invalid"
+      class="form-group"
+      [ngClass]="{invalid: form.get('userPassword').touched && form.get('userPassword').invalid}"
     >
-      <small *ngIf="form.get('userPassword').errors.required">
-        Введите пароль
-      </small>
-      <small *ngIf="form.get('userPassword').errors.minlength">
-        Пароль должен быть не менее
-        {{form.get('userPassword').errors.minlength.requiredLength}}
-        символов.
-        Сейчас он
-        {{form.get('userPassword').errors.minlength.actualLength}}
-        символа.
-      </small>
+      <label for="password">Пароль</label>
+      <input id=password type="password" formControlName="userPassword">
+      <div
+        *ngIf="form.get('userPassword').touched && form.get('userPassword').invalid"
+      >
+        <small *ngIf="form.get('userPassword').errors.required">
+          Введите пароль
+        </small>
+        <small *ngIf="form.get('userPassword').errors.minlength">
+          Пароль должен быть не менее
+          {{form.get('userPassword').errors.minlength.requiredLength}}
+          символов.
+          Сейчас он
+          {{form.get('userPassword').errors.minlength.actualLength}}
+          символа.
+        </small>
+      </div>
     </div>
-  </div>
 
-  <button
-    type="submit"
-    [disabled]="form.invalid"
-  >
-    Войти
-  </button>
-</form>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Войти
+    </button>
+  </form>
+</div>
+
