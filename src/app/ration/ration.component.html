@@ -88,6 +88,7 @@
         *ngFor="let product of breakfastProducts"
         class="component-card row col-7 align-items-center"
       >
+        <h5>{{product.product.name}}</h5>
         <svg
           width="1em"
           height="1em"
@@ -105,32 +106,37 @@
           alt="..."
         >
         <div class="col-6">
-          <h5 class="text-center">{{product.product.name}}</h5>
           <div class="row">
             <p class="col-9">Вес, г</p>
             <input
               class="col-3"
               type="number"
-              maxlength="4"
+              min="1"
+              max="9999"
               (input)="updateWeightByProduct(product, $event)"
               value="{{product.weight}}">
           </div>
+          <hr>
           <div class="row">
             <p class="col-9">Калорийность, ккал</p>
             <p class="col-3 value">{{product.product.calories * product.weight / 100 | number: '1.1-1'}}</p>
           </div>
+          <hr>
           <div class="row">
             <p class="col-9">Белки, г</p>
             <p class="col-3 value">{{product.product.proteins * product.weight / 100 | number: '1.1-1'}}</p>
           </div>
+          <hr>
           <div class="row">
             <p class="col-9">Жиры, г</p>
             <p class="col-3 value">{{product.product.fats * product.weight / 100 | number: '1.1-1'}}</p>
           </div>
+          <hr>
           <div class="row">
             <p class="col-9">Углеводы, г</p>
             <p class="col-3 value">{{product.product.carbohydrates * product.weight / 100 | number: '1.1-1'}}</p>
           </div>
+          <hr>
         </div>
       </div>
 

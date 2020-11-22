@@ -2,25 +2,61 @@ header {
   text-align: center;
 }
 
+h5 {
+  font-size: 1.5rem;
+  color: #424242;
+  font-weight: bolder;
+  font-style: italic;
+  position: absolute;
+  top: 1rem;
+  right: 40%;
+}
+
 .col-3 {
   text-align: right;
 }
 
-.value {
-  padding-right: 0.25rem;
+.col-6 {
+  margin-top: 3rem;
 }
 
 .col-9 {
   text-align: left;
 }
 
+.value {
+  padding-right: 0.25rem;
+}
+
 .row p {
-  margin: 0;
+  margin-top: 8px;
+  margin-bottom: 2px;
+//  display: block;
+//  white-space: nowrap;
+//  overflow: hidden;
+}
+
+hr {
+  margin: -45px auto 0px;
+  padding: 0;
+  height: 50px;
+  border: none;
+  border-bottom: 1px solid #BDBDBD;
+  box-shadow: 0 20px 10px -22px #9E9E9E;
+  width: 110%;
+
+  //border: 0;
+  //border-top: 2px dotted #ddd;
+  //position: absolute;
+  //width: 95%;
+  //margin-top: 2px;
+  //margin-bottom: 0;
 }
 
 img  {
   border-radius: 1rem;
-  padding: 0;
+  padding-top: 0;
+  margin-top: 2rem;
 }
 
 .eating-header {
@@ -57,12 +93,12 @@ input {
 }
 
 .bi {
+  position: absolute;
   color: white;
   background-color: #EF5350;
   border-radius: 50%;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0.75rem;
 }
 
 .bi:hover {
