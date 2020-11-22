@@ -9,7 +9,7 @@ h5 {
   font-style: italic;
   position: absolute;
   top: 1rem;
-  right: 40%;
+  left: 40%;
 }
 
 .col-3 {
@@ -93,6 +93,8 @@ input {
 }
 
 .bi {
+  width: 1.25rem;
+  height: 1.25rem;
   position: absolute;
   color: white;
   background-color: #EF5350;
