@@ -19,10 +19,6 @@ img  {
   padding: 0;
 }
 
-.ration-info-wrapper {
-  padding: 2rem;
-}
-
 .eating-header {
   text-align: center;
 }
@@ -36,4 +32,9 @@ img  {
   border-radius: 1px;
 }
 
-
+.component-card {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+}

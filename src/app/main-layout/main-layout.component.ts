@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../shared/services/auth.service';
 import {DateService} from '../shared/services/date.service';
@@ -16,13 +16,19 @@ export class MainLayoutComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private auth: AuthService,
+    public auth: AuthService,
     private dateService: DateService,
     private datePipe: DatePipe
-    ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.dateStr = this.datePipe.transform(this.dateService.currentDate(), 'yyyy-MM-dd');
+
+    // Если не авторизован, то перебросить на модельное окно входа.
+    if (!this.auth.isAuth()) {
+      this.router.navigate(['login-page']);
+    }
   }
 
   setWidth(): boolean {

@@ -36,6 +36,9 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit(): void {
+
+    console.log('submit');
+
     if (this.form.invalid) {
       return;
     }
@@ -51,5 +54,15 @@ export class LoginPageComponent implements OnInit {
       this.form.reset();
       this.router.navigate([`/ration/` + dateStr]);
     });
+  }
+
+  registration(): void {
+
+    const user: User = {
+      userName: this.form.value.userName,
+      userPassword: this.form.value.userPassword
+    };
+
+    this.auth.registration(user).subscribe();
   }
 }

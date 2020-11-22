@@ -1,16 +1,18 @@
 <nav
-  class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-  <h1>
-    <a class="navbar-brand" href="#">
-      Ration Calculation
-    </a>
-  </h1>
-
-  <ul>
-    <li>
-      <a href="#" (click)="logout($event)">Выйти</a>
-    </li>
-  </ul>
+  class="navbar navbar-expand-md navbar-light bg-light fixed-top"
+>
+  <div class="app-header">
+    <h1>
+      <a class="navbar-brand" href="#">
+        Ration Calculation
+      </a>
+    </h1>
+    <ul>
+      <li *ngIf="auth.isAuth()">
+        <a href="#" (click)="logout($event)">Выйти</a>
+      </li>
+    </ul>
+  </div>
 
   <button class="navbar-toggler"
           (click)="setWidth()"
@@ -26,7 +28,7 @@
     [ngbCollapse]="isCollapse">
     <ul class="navbar-nav col-lg-2 col-sm-8 col-md-3 col-8 sidenav">
       <li routerLinkActive="active">
-        <a class="nav-link"[routerLink]="['ration/', dateStr]">Сегодня</a>
+        <a class="nav-link" [routerLink]="['ration/', dateStr]">Сегодня</a>
       </li>
       <li routerLinkActive="active">
         <a class="nav-link" [routerLink]="['dishes']">Блюда</a>

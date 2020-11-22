@@ -44,12 +44,20 @@
   }
 }
 
-
 .content-wrapper {
   margin-top: 4.5rem;
 }
 
 .nav-link {
   padding-left: 0.5rem;
+}
+
+.navbar {
+}
+
+.app-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 

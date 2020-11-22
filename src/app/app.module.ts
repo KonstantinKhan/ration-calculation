@@ -16,8 +16,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {AddProductComponent} from './add-product/add-product.component';
 import {RefDirective} from './ref.directive';
-import { AddDishComponent } from './add-dish/add-dish.component';
-import { EditDishComponent } from './edit-dish/edit-dish.component';
+import {AddDishComponent} from './add-dish/add-dish.component';
+import {EditDishComponent} from './edit-dish/edit-dish.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSliderModule} from '@angular/material/slider';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -40,7 +44,11 @@ registerLocaleData(localeRu, 'ru');
     NgbModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatSliderModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'ru'},

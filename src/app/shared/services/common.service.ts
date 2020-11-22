@@ -5,7 +5,7 @@ import {Subject} from 'rxjs';
 export class CommonService {
   invokeEvent: Subject<any> = new Subject();
 
-  callNgInit() {
-    this.invokeEvent.next()
+  callNgInit(): void {
+    this.invokeEvent.next();
   }
 }

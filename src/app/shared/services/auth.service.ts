@@ -19,6 +19,12 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  // Метод для регистрации пользователя.
+  registration(user: User): Observable<any> {
+    return this.http.post(`${environment.dbUrl}/registration.json`, user);
+  }
+
+  // Метод для входа пользователя.
   login(user: User): Observable<any> {
     console.log('login');
     return this.http.post(`${environment.dbUrl}/auth.json`, user)
@@ -36,7 +42,6 @@ export class AuthService {
   }
 
   private setToken(response: AuthResponse | null): void {
-    console.log(response);
     if (response) {
       const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
       localStorage.setItem('token', response.idToken);
@@ -50,5 +55,16 @@ export class AuthService {
     const myHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return myHeaders;
+  }
+
+  // Метод для проверки авторизации пользователя.
+  isAuth(): boolean {
+    const currentDate = new Date();
+    const expiresDate = new Date(localStorage.getItem('expires'));
+    if ((currentDate.getTime() - expiresDate.getTime()) > 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
