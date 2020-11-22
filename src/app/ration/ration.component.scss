@@ -83,18 +83,35 @@ input {
 }
 
 .close-btn {
-  fill: currentColor;
-  width: 1.25rem;
-  height: 1.25rem;
   position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentColor;
   color: white;
   background-color: #EF5350;
   border-radius: 50%;
-  top: 0.75rem;
-  right: 0.75rem;
 }
 
 .close-btn:hover {
+  box-shadow: 0px 0px 0.5rem rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.edit-dish-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 2.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentColor;
+  color: white;
+  background-color: #FFA000;
+  border-radius: 50%;
+}
+
+.edit-dish-btn:hover {
   box-shadow: 0px 0px 0.5rem rgba(0, 0, 0, 0.8);
   cursor: pointer;
 }
