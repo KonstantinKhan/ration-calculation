@@ -1,6 +1,14 @@
 <nav
   class="navbar navbar-expand-md navbar-light bg-light fixed-top"
 >
+  <button class="navbar-toggler"
+          (click)="setWidth()"
+          type="button"
+          [attr.aria-expanded]="!isCollapse"
+          aria-controls="navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
   <div class="app-header justify-content-between">
     <a class="navbar-brand" href="#">
       Ration Calculation
@@ -14,14 +22,6 @@
       Выйти
     </a>
   </div>
-
-  <button class="navbar-toggler"
-          (click)="setWidth()"
-          type="button"
-          [attr.aria-expanded]="!isCollapse"
-          aria-controls="navbarSupportedContent">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
   <div
     class="navbar-collapse"
