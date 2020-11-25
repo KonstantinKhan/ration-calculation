@@ -11,20 +11,21 @@
     </button>
   </header>
 
-  <div class="row col-9">
-    <div class="col-3">Калорийность</div>
-    <div class="col-3">Белки</div>
-    <div class="col-3">Жиры</div>
-    <div class="col-3">Углеводы</div>
-  </div>
-
-  <div
-    *ngIf="ration != null"
-    class="row col-9">
-    <div class="col-3">{{ration.calories | number: '1.1-1'}}</div>
-    <div class="col-3">{{ration.proteins | number: '1.1-1'}}</div>
-    <div class="col-3">{{ration.fats | number: '1.1-1'}}</div>
-    <div class="col-3">{{ration.carbohydrates | number: '1.1-1'}}</div>
+  <div class="col-8 offset-1 sticky">
+    <div class="row justify-content-center">
+      <div class="col-2 parameters">Калорийность</div>
+      <div class="col-2 parameters">Белки</div>
+      <div class="col-2 parameters">Жиры</div>
+      <div class="col-2 parameters">Углеводы</div>
+    </div>
+    <div
+      *ngIf="ration != null"
+      class="row justify-content-center">
+      <div class="col-2 parameters">{{ration.calories | number: '1.1-1'}}</div>
+      <div class="col-2 parameters">{{ration.proteins | number: '1.1-1'}}</div>
+      <div class="col-2 parameters">{{ration.fats | number: '1.1-1'}}</div>
+      <div class="col-2 parameters">{{ration.carbohydrates | number: '1.1-1'}}</div>
+    </div>
   </div>
 
   <div class="row offset-1 col-8 p-2 eating-block">
