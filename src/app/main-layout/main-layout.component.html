@@ -1,17 +1,18 @@
 <nav
   class="navbar navbar-expand-md navbar-light bg-light fixed-top"
 >
-  <div class="app-header">
-    <h1>
-      <a class="navbar-brand" href="#">
-        Ration Calculation
-      </a>
-    </h1>
-    <ul>
-      <li *ngIf="auth.isAuth()">
-        <a href="#" (click)="logout($event)">Выйти</a>
-      </li>
-    </ul>
+  <div class="app-header justify-content-between">
+    <a class="navbar-brand" href="#">
+      Ration Calculation
+    </a>
+    <a
+      class="header-item"
+      *ngIf="auth.isAuth()"
+      href="#"
+      (click)="logout($event)"
+    >
+      Выйти
+    </a>
   </div>
 
   <button class="navbar-toggler"

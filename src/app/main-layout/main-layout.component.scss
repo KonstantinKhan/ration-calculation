@@ -52,12 +52,24 @@
   padding-left: 0.5rem;
 }
 
-.navbar {
-}
-
 .app-header {
   width: 100%;
   display: flex;
-  justify-content: center;
 }
 
+.navbar-brand {
+  text-align: left;
+  font-weight: bolder;
+}
+
+.header-item {
+  color: #9E9E9E;
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+.header-item:hover {
+  color: #424242;
+  font-weight: bolder;
+  transition: 0.5s ease;
+}
