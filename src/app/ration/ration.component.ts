@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, HostListener, Injectable, OnInit, ViewChild} from '@angular/core';
 import {DateService} from '../shared/services/date.service';
 import {DataComponent, Dish, DishProduct, DishTemplate, Product, Ration, RationDish, RationProduct} from '../shared/interfaces';
 import {Subscription} from 'rxjs';
@@ -9,10 +9,36 @@ import {DatePipe} from '@angular/common';
 import {RefDirective} from '../ref.directive';
 import {AddDishComponent} from '../add-dish/add-dish.component';
 import {EditDishComponent} from '../edit-dish/edit-dish.component';
+import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
+@Injectable()
+export class CustomDateParserFormatter extends NgbDateParserFormatter {
+
+  readonly DELIMITER = '/';
+
+  parse(value: string): NgbDateStruct | null {
+    if (value) {
+      const date = value.split(this.DELIMITER);
+      return {
+        day : parseInt(date[0], 10),
+        month : parseInt(date[1], 10),
+        year : parseInt(date[2], 10)
+      };
+    }
+    return null;
+  }
+
+  format(date: NgbDateStruct | null): string {
+    return date ? date.day + '.' + date.month + '.' + date.year : '';
+  }
+}
 
 @Component({
   selector: 'app-ration',
   templateUrl: './ration.component.html',
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter}
+  ],
   styleUrls: ['./ration.component.scss']
 })
 export class RationComponent implements OnInit {
@@ -27,6 +53,7 @@ export class RationComponent implements OnInit {
 
   ration: Ration;
   product: Product;
+  model: string;
 
   isSearchFocus = false;
 
