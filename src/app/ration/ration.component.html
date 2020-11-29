@@ -6,8 +6,13 @@
     <div class="ration-header">
       <span>Рацион на</span>
     </div>
-    <input class="date-ration" type="text" placeholder="дд.мм.гггг" [(ngModel)]="model"
-           ngbDatepicker #d="ngbDatepicker">
+    <input
+      class="date-ration"
+      type="text"
+      placeholder="дд.мм.гггг"
+      [(ngModel)]="model"
+      ngbDatepicker #d="ngbDatepicker"
+    >
     <button
       class="btn btn-outline-secondary btn-calendar"
       (click)="d.toggle()"
