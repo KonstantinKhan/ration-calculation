@@ -1,5 +1,6 @@
 header {
-  //text-align: center;
+  //margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 h5 {
@@ -12,15 +13,11 @@ h5 {
   left: 40%;
 }
 
-.col-3 {
+.col-5 {
   text-align: right;
 }
 
-.col-6 {
-  margin-top: 3rem;
-}
-
-.col-9 {
+.col-7 {
   text-align: left;
 }
 
@@ -29,28 +26,38 @@ h5 {
 }
 
 .value {
+  text-align: right;
   padding-right: 0.25rem;
 }
 
 .row p {
-  margin-top: 8px;
+  margin-top: 2px;
   margin-bottom: 2px;
 }
 
 hr {
-  margin: -45px auto 0px;
+  margin: -52px auto 0px;
   padding: 0;
   height: 50px;
   border: none;
   border-bottom: 1px solid #BDBDBD;
   box-shadow: 0 20px 10px -22px #9E9E9E;
-  width: 110%;
+  width: 100%;
 }
 
-img  {
+img {
+  flex: 1;
   border-radius: 1rem;
   padding-top: 0;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.container-img {
   margin-top: 3rem;
+  padding: 0;
+  height: 120px;
+  display: flex;
 }
 
 .eating-header {
@@ -63,7 +70,7 @@ img  {
 
 .component-card {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
-  margin: 1rem;
+  margin: 0.5rem 0 0.5rem 0;
   padding: 1rem;
   border: 1px solid #BDBDBD;
   border-radius: 0.75rem;
@@ -81,12 +88,18 @@ input {
   outline: none;
 }
 
+.input-weight {
+  text-align: right;
+  padding: 0 0.25rem 0 0;
+  margin-bottom: 0.5rem;
+}
+
 .close-btn {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   fill: currentColor;
   color: white;
   background-color: #EF5350;
@@ -125,12 +138,13 @@ input {
 
 .btn-calendar {
   padding: 4px 8px;
+  margin-right: 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .btn {
   height: 34px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
 }
 
 .date-ration {
@@ -145,4 +159,23 @@ input {
 .ration-header {
   display: flex;
   align-items: center;
+}
+
+.container-value {
+  padding-top: 3rem;
+  padding-right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.row-value {
+  justify-content: space-between;
+  margin: 0;
+  //flex: 1;
+  //overflow: hidden;
+}
+
+.eating-block {
+  //margin: 0;
+  overflow: hidden;
 }

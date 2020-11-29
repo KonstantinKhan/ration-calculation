@@ -31,11 +31,6 @@ img {
   text-align: center;
 }
 
-.eating-block {
-  border: 1px solid orange;
-  border-radius: 1px;
-}
-
 .search-results :hover {
   background-color: green;
   cursor: default;
