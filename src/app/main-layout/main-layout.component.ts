@@ -23,7 +23,12 @@ export class MainLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dateStr = this.datePipe.transform(this.dateService.currentDate(), 'yyyy-MM-dd');
+    // this.dateStr = this.datePipe.transform(this.dateService.currentDate(), 'yyyy-MM-dd');
+
+    this.dateStr = this.dateService.currentDate().year + '-'
+      + this.dateService.currentDate().month
+      + '-' + this.dateService.currentDate().day;
+
 
     // Если не авторизован, то перебросить на модельное окно входа.
     if (!this.auth.isAuth()) {

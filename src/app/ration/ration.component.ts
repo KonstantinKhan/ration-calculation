@@ -9,29 +9,8 @@ import {DatePipe} from '@angular/common';
 import {RefDirective} from '../ref.directive';
 import {AddDishComponent} from '../add-dish/add-dish.component';
 import {EditDishComponent} from '../edit-dish/edit-dish.component';
-import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-
-@Injectable()
-export class CustomDateParserFormatter extends NgbDateParserFormatter {
-
-  readonly DELIMITER = '/';
-
-  parse(value: string): NgbDateStruct | null {
-    if (value) {
-      const date = value.split(this.DELIMITER);
-      return {
-        day : parseInt(date[0], 10),
-        month : parseInt(date[1], 10),
-        year : parseInt(date[2], 10)
-      };
-    }
-    return null;
-  }
-
-  format(date: NgbDateStruct | null): string {
-    return date ? date.day + '.' + date.month + '.' + date.year : '';
-  }
-}
+import {NgbCalendar, NgbDate, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {CustomDateParserFormatter} from '../shared/services/CustomerDateParserFormatter';
 
 @Component({
   selector: 'app-ration',
@@ -53,6 +32,8 @@ export class RationComponent implements OnInit {
 
   ration: Ration;
   product: Product;
+
+  // Представление модели данных даты
   model: string;
 
   isSearchFocus = false;
@@ -86,7 +67,9 @@ export class RationComponent implements OnInit {
     public dishesService: DishService,
     public rationService: RationServices,
     public datePipe: DatePipe,
-    private resolver: ComponentFactoryResolver
+    private resolver: ComponentFactoryResolver,
+    private dateAdapter: NgbDateAdapter<string>,
+    private ngbCalendar: NgbCalendar
   ) {
   }
 
@@ -116,9 +99,9 @@ export class RationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const dateStr = this.datePipe.transform(this.dateService.currentDate(), 'yyyy-MM-dd');
+    this.model = this.dateAdapter.toModel(this.dateService.currentDate());
 
-    this.rationService.getRation(dateStr).subscribe((ration: Ration) => {
+    this.rationService.getRation(this.dateService.getCurrentDateStr()).subscribe((ration: Ration) => {
 
       this.ration = ration;
 
@@ -246,7 +229,7 @@ export class RationComponent implements OnInit {
 
   addProduct(product: Product, e: string): void {
     const rationProduct: RationProduct = {rationProductId: 0, product, weight: 0, eating: e};
-    this.rationService.addProduct(this.dateService.dateToStringFormat(this.dateService.currentDate()), rationProduct)
+    this.rationService.addProduct(this.dateService.getCurrentDateStr(), rationProduct)
       .subscribe((ration) => {
         this.update(ration);
       });
@@ -301,7 +284,8 @@ export class RationComponent implements OnInit {
       weightCooked: dish.weightCooked
     };
     const rationDish: RationDish = {rationDishId: 0, dish: d, weight: 0, eating: e};
-    this.rationService.addDish(this.dateService.dateToStringFormat(this.dateService.currentDate()), rationDish)
+
+    this.rationService.addDish(this.dateService.getCurrentDateStr(), rationDish)
       .subscribe((ration: Ration) => {
         this.update(ration);
       });
