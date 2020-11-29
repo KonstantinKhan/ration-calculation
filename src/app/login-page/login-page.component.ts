@@ -48,11 +48,9 @@ export class LoginPageComponent implements OnInit {
       userPassword: this.form.value.userPassword
     };
 
-    const dateStr = this.datePipe.transform(this.dateService.currentDate(), 'yyyy-MM-dd');
-
     this.auth.login(user).subscribe(() => {
       this.form.reset();
-      this.router.navigate([`/ration/` + dateStr]);
+      this.router.navigate([`/ration/` + this.dateService.getCurrentDateStr()]);
     });
   }
 
